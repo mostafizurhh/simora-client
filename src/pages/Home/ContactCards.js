@@ -18,7 +18,7 @@ const ContactCards = () => {
             name: 'Our Location',
             description: 'Brooklyn, NY 10014, United States',
             icon: marker,
-            bgclass: 'bg-gradient-to-b from-secondary to-accent'
+            bgclass: 'bg-gradient-to-b from-secondary to-warn'
         },
         {
             id: 3,
