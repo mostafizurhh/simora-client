@@ -1,0 +1,8 @@
+.banner {
+    background-image: url(../../assets/images/bg.png);
+}
+
+.banner image {
+    height: 50%;
+    width: 50%;
+}
