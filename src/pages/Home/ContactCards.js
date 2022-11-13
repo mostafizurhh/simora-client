@@ -18,7 +18,7 @@ const ContactCards = () => {
             name: 'Our Location',
             description: 'Brooklyn, NY 10014, United States',
             icon: marker,
-            bgclass: 'bg-gradient-to-b from-secondary to-warn'
+            bgclass: 'bg-gradient-to-t from-secondary to-accent'
         },
         {
             id: 3,
@@ -30,7 +30,7 @@ const ContactCards = () => {
     ]
 
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6 pb-2 text-white'>
             {
                 cardData.map(card => <ContactCard
                     key={card.id}
