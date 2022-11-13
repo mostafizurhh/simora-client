@@ -23,7 +23,7 @@ const Testimonial = () => {
         },
         {
             id: 3,
-            description: 'I seriously advise for guaranteed results and effectiveness, optimal prices with easy payment options.',
+            description: 'I seriously advise for guaranteed results and effectiveness with optimal prices.',
             image: people3,
             name: 'Joya',
             city: 'Mumbai, India'
