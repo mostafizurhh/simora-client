@@ -1,5 +1,5 @@
 import React from 'react';
-import PrimaryButton from '../../components/PrimaryButton/PrimaryButton';
+
 
 const AppoinmentOption = ({ setTreatment, appoinmentOption }) => {
     const { name, slots } = appoinmentOption;

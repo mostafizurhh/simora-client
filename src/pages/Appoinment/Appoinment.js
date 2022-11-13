@@ -8,9 +8,11 @@ const Appoinment = () => {
         <div>
             <AppoinmentBanner
                 selectDate={selectDate}
-                setSelectDate={setSelectDate}></AppoinmentBanner>
+                setSelectDate={setSelectDate}>
+            </AppoinmentBanner>
             <AvailableAppoinments
-                selectDate={selectDate}></AvailableAppoinments>
+                selectDate={selectDate}>
+            </AvailableAppoinments>
         </div>
     );
 };
