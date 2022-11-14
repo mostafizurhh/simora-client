@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext/AuthProvider';
 import logo from './logo.png'
 
@@ -11,21 +11,21 @@ const Header = () => {
             {
                 user?.uid ?
                     <>
-                        <li><Link to='/'>Home</Link></li>
-                        <li><Link to='/appoinment'>Appoinment</Link></li>
-                        <li><Link to='/about'>About</Link></li>
-                        <li><Link to='/reviews'>Reviews</Link></li>
-                        <li><Link to='/contact'>Contact Us</Link></li>
+                        <li><NavLink to='/'>Home</NavLink></li>
+                        <li><NavLink to='/appoinment'>Appoinment</NavLink></li>
+                        <li><NavLink to='/about'>About</NavLink></li>
+                        <li><NavLink to='/reviews'>Reviews</NavLink></li>
+                        <li><NavLink to='/contact'>Contact Us</NavLink></li>
                     </>
                     :
                     <>
-                        <li><Link to='/'>Home</Link></li>
-                        <li><Link to='/appoinment'>Appoinment</Link></li>
-                        <li><Link to='/about'>About</Link></li>
-                        <li><Link to='/reviews'>Reviews</Link></li>
-                        <li><Link to='/contact'>Contact Us</Link></li>
-                        <li><Link to='/login'>Login</Link></li>
-                        <li><Link to='/register'>Register</Link></li>
+                        <li><NavLink to='/'>Home</NavLink></li>
+                        <li><NavLink to='/appoinment'>Appoinment</NavLink></li>
+                        <li><NavLink to='/about'>About</NavLink></li>
+                        <li><NavLink to='/reviews'>Reviews</NavLink></li>
+                        <li><NavLink to='/contact'>Contact Us</NavLink></li>
+                        <li><NavLink to='/login'>Login</NavLink></li>
+                        <li><NavLink to='/register'>Register</NavLink></li>
                     </>
             }
         </>
@@ -42,7 +42,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <img style={{ width: 35, height: 35 }} className='rounded-2xl' src={logo} alt="" />
-                <Link to='/' className="btn btn-ghost normal-case text-xl">SIMORA</Link>
+                <NavLink to='/' className="btn btn-ghost normal-case text-xl">SIMORA</NavLink>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
