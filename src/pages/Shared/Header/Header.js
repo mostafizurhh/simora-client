@@ -1,33 +1,45 @@
+
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext/AuthProvider';
 import logo from './logo.png'
 
 const Header = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
 
+    const handleLogout = () => {
+        logout()
+            .then(() => { })
+            .catch(e => console.error(e))
+    }
     const menuItems =
         <>
+            <li><NavLink to='/'>Home</NavLink></li>
+            <li><NavLink to='/appoinment'>Appoinment</NavLink></li>
+            <li><NavLink to='/about'>About</NavLink></li>
+            <li><NavLink to='/contact'>Contact Us</NavLink></li>
+
             {
                 user?.uid ?
                     <>
-                        <li><NavLink to='/'>Home</NavLink></li>
-                        <li><NavLink to='/appoinment'>Appoinment</NavLink></li>
-                        <li><NavLink to='/about'>About</NavLink></li>
-                        <li><NavLink to='/reviews'>Reviews</NavLink></li>
-                        <li><NavLink to='/contact'>Contact Us</NavLink></li>
+                        <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+                        <li><button onClick={handleLogout}>Logout</button></li>
                     </>
                     :
                     <>
-                        <li><NavLink to='/'>Home</NavLink></li>
-                        <li><NavLink to='/appoinment'>Appoinment</NavLink></li>
-                        <li><NavLink to='/about'>About</NavLink></li>
-                        <li><NavLink to='/reviews'>Reviews</NavLink></li>
-                        <li><NavLink to='/contact'>Contact Us</NavLink></li>
                         <li><NavLink to='/login'>Login</NavLink></li>
                         <li><NavLink to='/register'>Register</NavLink></li>
                     </>
             }
+            {
+                user?.photoURL ?
+                    <div className="btn btn-circle btn-outline tooltip tooltip-bottom mr-2 w-12" data-tip={user?.displayName}>
+                        <img src={user?.photoURL} alt="" />
+                    </div>
+                    :
+                    <></>
+            }
+
         </>
 
     return (
