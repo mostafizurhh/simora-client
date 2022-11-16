@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthContext/AuthProvider';
 
 
-const BookingModal = ({ treatment, setTreatment, selectDate }) => {
+const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
     const { user } = useContext(AuthContext);
     const { name, slots } = treatment;
 
@@ -42,7 +42,7 @@ const BookingModal = ({ treatment, setTreatment, selectDate }) => {
                 if (data.acknowledged) {
                     setTreatment(null)
                     toast.success('Your Booking Has Been Confirmed', { duration: 4000 });
-
+                    refetch();/* auto update data without relodad */
                 }
             })
     }
@@ -55,7 +55,7 @@ const BookingModal = ({ treatment, setTreatment, selectDate }) => {
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-lg mb-5 font-bold">{name}</h3>
                     <form onSubmit={handleBooking}>
-                        <input type="text" name='date' defaultValue={format(selectDate, 'PP')} className="input input-bordered w-full mb-5 max-w-xs md:max-w-md" readOnly />
+                        <input type="text" name='date' defaultValue={format(selectedDate, 'PP')} className="input input-bordered w-full mb-5 max-w-xs md:max-w-md" readOnly />
                         <select name='slot' className="select select-bordered w-full max-w-xs md:max-w-md mb-5">
                             {
                                 slots.map((slot, index) => <option

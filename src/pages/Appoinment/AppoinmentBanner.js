@@ -5,7 +5,7 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
 
-const AppoinmentBanner = ({ selectDate, setSelectDate }) => {
+const AppoinmentBanner = ({ selectedDate, setselectedDate }) => {
 
 
     return (
@@ -15,8 +15,8 @@ const AppoinmentBanner = ({ selectDate, setSelectDate }) => {
                     <div className='card bg-base-100 md:mr-8 lg:mr-16'>
                         <DayPicker
                             mode='single'
-                            dateSelect={selectDate}
-                            onSelect={setSelectDate}
+                            dateSelect={selectedDate}
+                            onSelect={setselectedDate}
                             showOutsideDays
                             fixedWeeks
                         />

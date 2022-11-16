@@ -4,14 +4,15 @@ import React, { useState } from 'react';
 import AppoinmentOption from './AppoinmentOption';
 import BookingModal from './BookingModal';
 
-const AvailableAppoinments = ({ selectDate }) => {
+const AvailableAppoinments = ({ selectedDate }) => {
     const [treatment, setTreatment] = useState(null);
+    const date = format(selectedDate, 'PP');//send date as query parameter to get the right date for booking
 
     /* use react query to load data */
-    const { data: appoinmentOptions = [] } = useQuery({
-        queryKey: ['AppoinmentOptions'],
+    const { data: appoinmentOptions = [], refetch } = useQuery({
+        queryKey: ['AppoinmentOptions', date],
         queryFn: () =>
-            fetch('http://localhost:5000/AppoinmentOptions')
+            fetch(`http://localhost:5000/AppoinmentOptions?date=${date}`)
                 .then(res => res.json())
     })
 
@@ -25,7 +26,7 @@ const AvailableAppoinments = ({ selectDate }) => {
     return (
         <section className='px-6 md:px-12'>
             <div>
-                <p className='font-extrabold text-secondary text-xl text-center mt-12'>Appoinment Available on {format(selectDate, 'PP')}. </p>
+                <p className='font-extrabold text-secondary text-xl text-center mt-12'>Appoinment Available on {format(selectedDate, 'PP')}. </p>
             </div>
             <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10'>
                 {
@@ -39,9 +40,10 @@ const AvailableAppoinments = ({ selectDate }) => {
                 {
                     treatment &&
                     <BookingModal
-                        selectDate={selectDate}
+                        selectedDate={selectedDate}
                         treatment={treatment}
                         setTreatment={setTreatment}
+                        refetch={refetch} /* auto update data without relodad */
                     >
                     </BookingModal>
                 }
