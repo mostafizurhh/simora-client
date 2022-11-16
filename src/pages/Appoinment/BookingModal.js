@@ -44,6 +44,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
                     toast.success('Your Booking Has Been Confirmed', { duration: 4000 });
                     refetch();/* auto update data without relodad */
                 }
+                /* Limit one booking per user per treatment per day */
                 else {
                     toast.error(data.message, { duration: 4000 })
                 }
