@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import React, { useState } from 'react';
+import Spinner from '../Shared/Spinner/Spinner';
 import AppoinmentOption from './AppoinmentOption';
 import BookingModal from './BookingModal';
 
@@ -9,7 +10,7 @@ const AvailableAppoinments = ({ selectedDate }) => {
     const date = format(selectedDate, 'PP');//send date as query parameter to get the right date for booking
 
     /* use react query to load data */
-    const { data: appoinmentOptions = [], refetch } = useQuery({
+    const { data: appoinmentOptions = [], refetch, isLoading } = useQuery({
         queryKey: ['AppoinmentOptions', date],
         queryFn: () =>
             fetch(`http://localhost:5000/AppoinmentOptions?date=${date}`)
@@ -22,6 +23,10 @@ const AvailableAppoinments = ({ selectedDate }) => {
     //         .then(res => res.json())
     //         .then(data => setAppoinmentOptions(data))
     // }, [])
+
+    if (isLoading) {
+        return <Spinner></Spinner>
+    }
 
     return (
         <section className='px-6 md:px-12'>
