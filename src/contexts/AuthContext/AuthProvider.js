@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
     /* Update User Info */
     const updateUserInfo = (info) => {
         setLoading(true)
-        return updateProfile(auth, info)
+        return updateProfile(auth.currentUser, info)
     }
 
     /* Reset Password */

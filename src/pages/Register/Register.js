@@ -12,7 +12,7 @@ import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'fi
 const Register = () => {
     const [error, setError] = useState();
 
-    const { createUser, providerLogin, emailVerification, updateUserInfo } = useContext(AuthContext)
+    const { createUser, providerLogin, verifyEmail, updateUserInfo } = useContext(AuthContext)
 
     /*--------------
     navigate user 
@@ -24,12 +24,12 @@ const Register = () => {
 
     const handleFormSubmit = event => {
         event.preventDefault()
-        const form = event.target
+        // const form = event.target;
 
-        const name = form.name.value;
-        const photoURL = form.photoURL.value;
-        const email = form.email.value;
-        const password = form.password.value;
+        const userName = event.target.userName.value;
+        const photoURL = event.target.photoURL.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
 
         if (!/(?=.*[a-z])/.test(password)) {
             setError('Please provide at least 1 lowercase letter')
@@ -57,10 +57,10 @@ const Register = () => {
                 const user = result.user;
                 console.log(user)
                 setError('')
-                form.reset()
+                event.target.reset()
                 handleEmailVerification()
-                handleUpdateUserInfo(name, photoURL)
-                navigate(from, { replace: true })/* navigate user */
+                handleUpdateUserInfo(userName, photoURL)
+                saveUserInfo(userName, email)
                 toast.success('Please verify your email to register successfully!', { duration: 5000 })
             })
             .catch(error => {
@@ -70,19 +70,35 @@ const Register = () => {
     }
 
     const handleEmailVerification = () => {
-        emailVerification()
+        verifyEmail()
             .then(() => { })
             .catch(e => console.error(e))
     }
 
-    const handleUpdateUserInfo = (name, photoURL) => {
+    const handleUpdateUserInfo = (userName, photoURL) => {
         const info = {
-            displayName: name,
+            displayName: userName,
             photoURL: photoURL
         }
         updateUserInfo(info)
             .then(() => { })
             .catch(e => console.error(e))
+    }
+
+    const saveUserInfo = (userName, email) => {
+        const dbUser = { name: userName, email };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(dbUser)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                navigate(from, { replace: true })
+            })
     }
 
     const facebookProvider = new FacebookAuthProvider()
@@ -104,6 +120,7 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
+                saveUserInfo(user?.displayName, user?.email)
                 navigate(from, { replace: true })/* navigate user */
                 setError('')
             })
@@ -128,12 +145,12 @@ const Register = () => {
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <h1 className="text-3xl text-center font-bold">Register now!</h1>
-                    <form onClick={handleFormSubmit} className="card-body">
+                    <form onSubmit={handleFormSubmit} className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" name='name' placeholder="Full Name" className="input input-bordered" required />
+                            <input type="text" name='userName' placeholder="Full Name" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">

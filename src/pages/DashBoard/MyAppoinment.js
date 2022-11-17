@@ -14,7 +14,6 @@ const MyAppoinment = () => {
         queryFn: async () => {
             const res = await fetch(url);
             const data = await res.json();
-            console.log(data)
             return data;
         }
     })
@@ -41,11 +40,11 @@ const MyAppoinment = () => {
                         {
                             booking.map((book, i) =>
                                 <tr className="hover" key={i}>
-                                    <th>{i}</th>
-                                    <td>{data.treatmentName}</td>
-                                    <td>Quality Control Specialist</td>
-                                    <td>Blue</td>
-                                    <td>Blue</td>
+                                    <th>{i + 1}</th>
+                                    <td>{book.customer}</td>
+                                    <td>{book.treatmentName}</td>
+                                    <td>{book.bookingDate}</td>
+                                    <td>{book.slot}</td>
                                 </tr>
                             )
                         }
