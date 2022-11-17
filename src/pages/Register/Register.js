@@ -85,6 +85,7 @@ const Register = () => {
             .catch(e => console.error(e))
     }
 
+    /* request server side to create an API */
     const saveUserInfo = (userName, email) => {
         const dbUser = { name: userName, email };
         fetch('http://localhost:5000/users', {
@@ -97,7 +98,19 @@ const Register = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                navigate(from, { replace: true })
+                getUserToken(email)
+            })
+    }
+
+    /* get JWT api from server */
+    const getUserToken = email => {
+        fetch(`http://localhost:5000/jwt?email=${email}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.accessToken) {
+                    localStorage.setItem('accessToken', data.accessToken);
+                    navigate(from, { replace: true })
+                }
             })
     }
 
@@ -121,6 +134,7 @@ const Register = () => {
                 const user = result.user;
                 console.log(user)
                 saveUserInfo(user?.displayName, user?.email)
+                getUserToken(user?.email)
                 navigate(from, { replace: true })/* navigate user */
                 setError('')
             })
