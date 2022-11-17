@@ -7,11 +7,15 @@ import icon2 from '../../assets/social-icons/Google.png'
 import icon3 from '../../assets/social-icons/Github.png'
 import { AuthContext } from '../../contexts/AuthContext/AuthProvider';
 import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { useToken } from '../../hooks/useToken';
 
 const Login = () => {
     const [error, setError] = useState('')
     const [email, setEmail] = useState('')
     const { loginWithEmail, providerLogin, passwordReset, setLoading } = useContext(AuthContext)
+
+    const [loggedinUserEmail, setLoggedinUserEmail] = useState('');
+    const [token] = useToken(loggedinUserEmail)
 
     /*--------------
      navigate user 
@@ -21,6 +25,9 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/'
     /*-------------------------------------------------*/
 
+    if (token) {
+        navigate(from, { replace: true })/* navigate user */
+    }
     const handleFormSubmit = event => {
         event.preventDefault()
         const form = event.target;
@@ -31,7 +38,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user
                 console.log(user)
-                navigate(from, { replace: true })/* navigate user */
+                setLoggedinUserEmail(email)
                 setError('')
                 form.reset()
                 /* restrict user to navigate unless email verification */

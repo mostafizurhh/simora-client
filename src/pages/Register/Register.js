@@ -69,8 +69,7 @@ const Register = () => {
                 setError('')
                 event.target.reset()
                 handleEmailVerification()
-                handleUpdateUserInfo(userName, photoURL)
-                saveUserInfo(userName, email)
+                handleUpdateUserInfo(userName, photoURL, email)
                 toast.success('Please verify your email to register successfully!', { duration: 5000 })
             })
             .catch(error => {
@@ -85,13 +84,16 @@ const Register = () => {
             .catch(e => console.error(e))
     }
 
-    const handleUpdateUserInfo = (userName, photoURL) => {
+    const handleUpdateUserInfo = (userName, photoURL, email) => {
         const info = {
             displayName: userName,
-            photoURL: photoURL
+            photoURL: photoURL,
+            email: email
         }
         updateUserInfo(info)
-            .then(() => { })
+            .then(() => {
+                saveUserInfo(userName, email)
+            })
             .catch(e => console.error(e))
     }
 
@@ -144,7 +146,6 @@ const Register = () => {
                 const user = result.user;
                 console.log(user)
                 saveUserInfo(user?.displayName, user?.email)
-                getUserToken(user?.email)
                 navigate(from, { replace: true })/* navigate user */
                 setError('')
             })
