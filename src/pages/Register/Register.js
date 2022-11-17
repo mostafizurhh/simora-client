@@ -8,6 +8,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext/AuthProvider';
 import toast from 'react-hot-toast';
 import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { useToken } from '../../hooks/useToken';
 
 const Register = () => {
     const [error, setError] = useState();
@@ -21,6 +22,15 @@ const Register = () => {
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
     /*-------------------------------------------------*/
+
+    /* get JWT token for a registered user*/
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail)
+
+    if (token) {
+        navigate(from, { replace: true })
+    }
+
 
     const handleFormSubmit = event => {
         event.preventDefault()
@@ -98,21 +108,21 @@ const Register = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                getUserToken(email)
+                setCreatedUserEmail(email)
             })
     }
 
     /* get JWT api from server */
-    const getUserToken = email => {
-        fetch(`http://localhost:5000/jwt?email=${email}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.accessToken) {
-                    localStorage.setItem('accessToken', data.accessToken);
-                    navigate(from, { replace: true })
-                }
-            })
-    }
+    // const getUserToken = email => {
+    //     fetch(`http://localhost:5000/jwt?email=${email}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.accessToken) {
+    //                 localStorage.setItem('accessToken', data.accessToken);
+    //                 navigate(from, { replace: true })
+    //             }
+    //         })
+    // }
 
     const facebookProvider = new FacebookAuthProvider()
     const googleProvider = new GoogleAuthProvider()
