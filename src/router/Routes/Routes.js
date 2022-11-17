@@ -6,8 +6,8 @@ import Login from '../../pages/Login/Login';
 import Register from '../../pages/Register/Register';
 import PrivateRoute from "./PrivateRoute";
 import About from '../../pages/About/About';
-import DashBoard from '../../pages/DashBoard/DashBoard';
 import DashBoardLayout from '../../layout/DashBoardLayout/DashBoardLayout';
+import MyAppoinment from "../../pages/DashBoard/MyAppoinment";
 
 
 
@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <DashBoard></DashBoard>
+                element: <MyAppoinment></MyAppoinment>
             }
         ]
     }
