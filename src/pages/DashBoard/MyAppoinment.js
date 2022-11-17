@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../Shared/Spinner/Spinner';
-import { data } from 'autoprefixer';
+
 
 const MyAppoinment = () => {
     const { user } = useContext(AuthContext)
