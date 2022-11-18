@@ -145,8 +145,7 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                saveUserInfo(user?.displayName, user?.email)
-                navigate(from, { replace: true })/* navigate user */
+                handleUpdateUserInfo(user.displayName, user.photoURL, user.email)
                 setError('')
             })
             .catch(e => console.error(e))

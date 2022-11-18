@@ -76,7 +76,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                navigate(from, { replace: true })/* navigate user */
+                setLoggedinUserEmail(user.email)
                 setError('')
             })
             .catch(e => console.error(e))
