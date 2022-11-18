@@ -27,7 +27,7 @@ const MyAppoinment = () => {
     }
 
     return (
-        <div>
+        <div className='mx-5'>
             <h2 className='text-2xl font-bold mb-5 mt-8'>My Appoinment</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">

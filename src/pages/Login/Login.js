@@ -10,12 +10,12 @@ import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'fi
 import { useToken } from '../../hooks/useToken';
 
 const Login = () => {
-    const [error, setError] = useState('')
-    const [email, setEmail] = useState('')
-    const { loginWithEmail, providerLogin, passwordReset, setLoading } = useContext(AuthContext)
+    const [error, setError] = useState('');
+    const [email, setEmail] = useState('');
+    const { loginWithEmail, providerLogin, passwordReset, setLoading } = useContext(AuthContext);
 
     const [loggedinUserEmail, setLoggedinUserEmail] = useState('');
-    const [token] = useToken(loggedinUserEmail)
+    const [token] = useToken(loggedinUserEmail);
 
     /*--------------
      navigate user 
