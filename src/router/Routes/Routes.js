@@ -9,6 +9,7 @@ import About from '../../pages/About/About';
 import DashBoardLayout from '../../layout/DashBoardLayout/DashBoardLayout';
 import MyAppoinment from "../../pages/DashBoard/MyAppoinment";
 import AllUsers from '../../pages/DashBoard/AllUsers'
+import AdminRoute from "./AdminRoute";
 
 
 
@@ -53,7 +54,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/allUsers',
-                element: <AllUsers></AllUsers>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             }
         ]
     }
