@@ -1,4 +1,8 @@
+import { async } from '@firebase/util';
+import { useQuery } from '@tanstack/react-query';
+import is from 'date-fns/esm/locale/is/index.js';
 import React from 'react';
+import Spinner from '../Shared/Spinner/Spinner';
 
 const AddADoctor = () => {
     const handleFormSubmit = event => {
@@ -17,6 +21,19 @@ const AddADoctor = () => {
         }
         console.log(doctorInfo)
     }
+    /* load speciality field data from server */
+    const { data: specialities = [], isLoading } = useQuery({
+        queryKey: ['speciality'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/specialities');
+            const data = await res.json();
+            return data
+        }
+    })
+
+    if (isLoading) {
+        return <Spinner></Spinner>
+    }
 
     return (
         <div className='mx-5'>
@@ -31,8 +48,13 @@ const AddADoctor = () => {
 
                     <select name='speciality' className="select select-bordered w-full mb-5 max-w-xs md:max-w-md">
                         <option selected>Choose A Speciality</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
+                        {
+                            specialities.map(speciality => <option
+                                key={speciality._id}
+                                value={speciality.name}>
+                                {speciality.name}
+                            </option>)
+                        }
                     </select>
 
                     <input type="file" className="file-input file-input-bordered file-input-accent w-full mb-5 max-w-xs md:max-w-md" />
