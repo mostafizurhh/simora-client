@@ -6,7 +6,7 @@ import { AuthContext } from '../../contexts/AuthContext/AuthProvider';
 
 const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
     const { user } = useContext(AuthContext);
-    const { name, slots } = treatment;
+    const { name, slots, price } = treatment;
 
     const handleBooking = event => {
         event.preventDefault()
@@ -21,6 +21,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
         const bookinginfo = {
             treatmentId: treatment.serviceId,
             treatmentName: name,
+            price: treatment.price,
             bookingDate: date,
             slot,
             customer,
@@ -58,6 +59,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
                 <div className="modal-box relative">
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="text-lg mb-5 font-bold">{name}</h3>
+                    <h3 className="text-lg mb-5 font-bold">Price: ${price}</h3>
                     <form onSubmit={handleBooking}>
                         <input type="text" name='date' defaultValue={format(selectedDate, 'PP')} className="input input-bordered w-full mb-5 max-w-xs md:max-w-md" readOnly />
                         <select name='slot' className="select select-bordered w-full max-w-xs md:max-w-md mb-5">

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../Shared/Spinner/Spinner';
+import { Link } from 'react-router-dom';
 
 
 const MyAppoinment = () => {
@@ -36,8 +37,10 @@ const MyAppoinment = () => {
                             <th></th>
                             <th>Name</th>
                             <th>TreatMent</th>
+                            <th>Price</th>
                             <th>Date</th>
                             <th>Time</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,9 +49,21 @@ const MyAppoinment = () => {
                                 <tr className="hover" key={i}>
                                     <th>{i + 1}</th>
                                     <td>{book.customer}</td>
-                                    <td>{book.treatmentName}</td>
+                                    <td>{book.treatmentName}
+                                    </td>
+                                    <td>${book.price}
+                                    </td>
                                     <td>{book.bookingDate}</td>
                                     <td>{book.slot}</td>
+                                    <td>
+                                        {
+                                            book.price && !book.paid && <Link to={`/dashboard/payment/${book._id}`}>
+                                                <button className='btn btn-accent btn-sm'>Pay Now</button></Link>
+                                        }
+                                        {
+                                            book.price && book.paid && <span className='text-success font-bold'>Paid</span>
+                                        }
+                                    </td>
                                 </tr>
                             )
                         }

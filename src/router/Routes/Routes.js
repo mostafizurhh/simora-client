@@ -12,6 +12,7 @@ import AllUsers from '../../pages/DashBoard/AllUsers'
 import AdminRoute from "./AdminRoute";
 import AddADoctor from "../../pages/DashBoard/AddADoctor";
 import ManageDoctors from "../../pages/DashBoard/ManageDoctors";
+import Payment from "../../pages/Payment/Payment";
 
 
 
@@ -66,6 +67,11 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/managedoctors',
                 element: <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <AdminRoute><Payment></Payment></AdminRoute>,
+                loader: async ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`)
             }
         ]
     }
