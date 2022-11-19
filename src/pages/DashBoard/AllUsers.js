@@ -16,6 +16,7 @@ const AllUsers = () => {
         }
     })
 
+    /* make a user admin */
     const handleMakeAdmin = id => {
         fetch(`http://localhost:5000/users/admin/${id}`, {
             method: 'PUT'
@@ -27,6 +28,24 @@ const AllUsers = () => {
                     refetch();
                 }
             })
+    }
+
+    /* delete a user */
+    const handleDelete = id => {
+        const proceed = window.confirm('Are you sure to delete?')
+        if (proceed) {
+            fetch(`http://localhost:5000/users/${id}`, {
+                method: 'DELETE',
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.deletedCount > 0) {
+                        toast.success(`User deleted successfully`, { duration: 4000 });
+                        refetch()
+                    }
+                })
+        }
     }
 
     if (isLoading) {
@@ -55,7 +74,7 @@ const AllUsers = () => {
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-secondary btn-sm'>Make Admin</button>}</td>
-                                    <td><button className='btn btn-error btn-sm'>Delete</button></td>
+                                    <td><button onClick={() => handleDelete(user._id)} className='btn btn-error btn-sm'>Delete</button></td>
                                 </tr>
                             )
                         }
