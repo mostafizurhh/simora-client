@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import Spinner from '../Shared/Spinner/Spinner';
 
 const AddADoctor = () => {
+    const navigate = useNavigate()
     const imageHostKey = process.env.REACT_APP_imgbb_key;
     // console.log(imageHostKey)
     const handleFormSubmit = event => {
@@ -14,15 +16,6 @@ const AddADoctor = () => {
         const phone = form.phone.value;
         const photo = form.photo.value;
         const speciality = form.speciality.value;
-
-        const doctorInfo = {
-            name,
-            email,
-            phone,
-            photo,
-            speciality
-        }
-        console.log(doctorInfo)
 
         /* hosting image in imagebb */
         const formData = new FormData();
@@ -37,13 +30,34 @@ const AddADoctor = () => {
             .then(res => res.json())
             .then(imgData => {
                 if (imgData.success) {
-                    console.log(imgData.data.url)
+                    // console.log(imgData.data.url)
+                    const doctorInfo = {
+                        name,
+                        email,
+                        phone,
+                        photo: imgData.data.url,
+                        speciality
+                    }
+                    console.log(doctorInfo)
+                    /* save doctors info to DB */
+                    fetch('http://localhost:5000/doctors', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify(doctorInfo)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data)
+                            toast.success(`Doctor ${name} added successfully`, { duration: 4000 });
+                            form.reset();
+                            navigate('/dashboard/managedoctors')
+                        })
                 }
             })
 
-
-        toast.success('Doctor added successfully', { duration: 4000 })
-        form.reset()
     }
 
     /* load speciality field data from server */
