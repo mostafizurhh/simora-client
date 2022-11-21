@@ -5,7 +5,6 @@ import Home from '../../pages/Home/Home';
 import Login from '../../pages/Login/Login';
 import Register from '../../pages/Register/Register';
 import PrivateRoute from "./PrivateRoute";
-import About from '../../pages/About/About';
 import DashBoardLayout from '../../layout/DashBoardLayout/DashBoardLayout';
 import MyAppoinment from "../../pages/DashBoard/MyAppoinment";
 import AllUsers from '../../pages/DashBoard/AllUsers'
@@ -13,6 +12,7 @@ import AdminRoute from "./AdminRoute";
 import AddADoctor from "../../pages/DashBoard/AddADoctor";
 import ManageDoctors from "../../pages/DashBoard/ManageDoctors";
 import Payment from "../../pages/Payment/Payment";
+import ErrorPage from "../../pages/Shared/ErrorPage/Error";
 
 
 
@@ -36,14 +36,6 @@ export const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
-            },
-            {
-                path: '/about',
-                element: <About></About>
-            },
-            {
-                path: '/contact',
-                element: <About></About>
             }
         ]
     },
@@ -74,5 +66,9 @@ export const router = createBrowserRouter([
                 loader: async ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`)
             }
         ]
+    },
+    {
+        path: '*',
+        element: <ErrorPage></ErrorPage>
     }
 ])
