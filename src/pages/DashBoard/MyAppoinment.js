@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const MyAppoinment = () => {
     const { user } = useContext(AuthContext)
 
-    const url = `http://localhost:5000/booking?email=${user?.email}`
+    const url = `https://simora-server.vercel.app/booking?email=${user?.email}`
 
     const { data: booking = [], isLoading } = useQuery({
         queryKey: ['booking', user?.email],
@@ -31,7 +31,7 @@ const MyAppoinment = () => {
         <div className='mx-5'>
             <h2 className='text-2xl font-bold mb-5 mt-8'>My Appoinment</h2>
             <div className="overflow-x-auto">
-                <table className="table w-full">
+                <table className="table w-full bg-indigo-300">
                     <thead>
                         <tr>
                             <th></th>

@@ -30,7 +30,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
         }
 
         /* send bookingInfo data to server to create a new collection */
-        fetch('http://localhost:5000/booking', {
+        fetch('https://simora-server.vercel.app/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

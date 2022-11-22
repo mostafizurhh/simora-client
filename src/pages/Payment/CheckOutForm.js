@@ -15,7 +15,7 @@ const CheckOutForm = ({ booking }) => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://simora-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const CheckOutForm = ({ booking }) => {
                 transactionId: paymentIntent.id
             }
 
-            fetch("http://localhost:5000/userPayments", {
+            fetch("https://simora-server.vercel.app/userPayments", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

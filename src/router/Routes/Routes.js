@@ -62,8 +62,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/payment/:id',
-                element: <AdminRoute><Payment></Payment></AdminRoute>,
-                loader: async ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`)
+                element: <Payment></Payment>,
+                loader: async ({ params }) => fetch(`https://simora-server.vercel.app/booking/${params.id}`)
             }
         ]
     },

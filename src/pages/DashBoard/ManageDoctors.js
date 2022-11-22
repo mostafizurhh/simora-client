@@ -16,7 +16,7 @@ const ManageDoctors = () => {
         queryKey: ['doctors'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:5000/doctors', {
+                const res = await fetch('https://simora-server.vercel.app/doctors', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -34,7 +34,7 @@ const ManageDoctors = () => {
     const handleDelete = doctor => {
         // const proceed = window.confirm('Are you seure to delete?')
         // if (proceed) {
-        fetch(`http://localhost:5000/doctors/${doctor._id}`, {
+        fetch(`https://simora-server.vercel.app/doctors/${doctor._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
