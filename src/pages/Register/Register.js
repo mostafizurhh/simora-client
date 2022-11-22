@@ -100,7 +100,7 @@ const Register = () => {
     /* request server side to create an API */
     const saveUserInfo = (userName, email) => {
         const dbUser = { name: userName, email };
-        fetch('https://simora-server.vercel.app/users', {
+        fetch('https://simora-server-mostafizurhh.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -116,7 +116,7 @@ const Register = () => {
 
     /* get JWT api from server */
     // const getUserToken = email => {
-    //     fetch(`https://simora-server.vercel.app/jwt?email=${email}`)
+    //     fetch(`https://simora-server-mostafizurhh.vercel.app/jwt?email=${email}`)
     //         .then(res => res.json())
     //         .then(data => {
     //             if (data.accessToken) {

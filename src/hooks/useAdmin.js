@@ -6,7 +6,7 @@ export const useAdmin = email => {
 
     useEffect(() => {
         if (email) {
-            fetch(`https://simora-server.vercel.app/users/admin/${email}`)
+            fetch(`https://simora-server-mostafizurhh.vercel.app/users/admin/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     // console.log(data)

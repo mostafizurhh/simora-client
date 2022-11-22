@@ -10,7 +10,7 @@ const AllUsers = () => {
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('https://simora-server.vercel.app/users');
+            const res = await fetch('https://simora-server-mostafizurhh.vercel.app/users');
             const data = await res.json();
             return data;
         }
@@ -18,7 +18,7 @@ const AllUsers = () => {
 
     /* make a user admin */
     const handleMakeAdmin = id => {
-        fetch(`https://simora-server.vercel.app/users/admin/${id}`, {
+        fetch(`https://simora-server-mostafizurhh.vercel.app/users/admin/${id}`, {
             method: 'PUT'
         })
             .then(res => res.json())
@@ -34,7 +34,7 @@ const AllUsers = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure to delete?')
         if (proceed) {
-            fetch(`https://simora-server.vercel.app/users/${id}`, {
+            fetch(`https://simora-server-mostafizurhh.vercel.app/users/${id}`, {
                 method: 'DELETE',
             })
                 .then(res => res.json())
@@ -69,7 +69,8 @@ const AllUsers = () => {
                     <tbody>
                         {
                             users.map((user, i) =>
-                                <tr className="hover" key={i}>
+                                <tr className="hover text-indigo-500"
+                                    key={i}>
                                     <th>{i + 1}</th>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>

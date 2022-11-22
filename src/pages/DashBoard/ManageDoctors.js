@@ -16,7 +16,7 @@ const ManageDoctors = () => {
         queryKey: ['doctors'],
         queryFn: async () => {
             try {
-                const res = await fetch('https://simora-server.vercel.app/doctors', {
+                const res = await fetch('https://simora-server-mostafizurhh.vercel.app/doctors', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -34,7 +34,7 @@ const ManageDoctors = () => {
     const handleDelete = doctor => {
         // const proceed = window.confirm('Are you seure to delete?')
         // if (proceed) {
-        fetch(`https://simora-server.vercel.app/doctors/${doctor._id}`, {
+        fetch(`https://simora-server-mostafizurhh.vercel.app/doctors/${doctor._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -59,24 +59,26 @@ const ManageDoctors = () => {
     }
 
     return (
-        <div>
+        <div className='px-4'>
             <h2 className='text-2xl font-bold mb-5 mt-8'>Manage Doctors</h2>
             <div className="overflow-x-auto w-full">
-                <table className="table w-full">
+                <table className="table">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>Sl</th>
+                            <th>Avatar</th>
                             <th>Name</th>
                             <th>Speciality</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Action</th>
-                            <th></th>
+
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            doctors.map((doctor, i) => <tr key={doctor._id}>
+                            doctors.map((doctor, i) => <tr key={doctor._id}
+                                className='text-indigo-500 hover'>
                                 <td>{i + 1}</td>
                                 <td>
                                     <div className="avatar">

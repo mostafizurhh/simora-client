@@ -40,7 +40,7 @@ const AddADoctor = () => {
                     }
                     console.log(doctorInfo)
                     /* save doctors info to DB */
-                    fetch('https://simora-server.vercel.app/doctors', {
+                    fetch('https://simora-server-mostafizurhh.vercel.app/doctors', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -64,7 +64,7 @@ const AddADoctor = () => {
     const { data: specialities = [], isLoading } = useQuery({
         queryKey: ['speciality'],
         queryFn: async () => {
-            const res = await fetch('https://simora-server.vercel.app/specialities');
+            const res = await fetch('https://simora-server-mostafizurhh.vercel.app/specialities');
             const data = await res.json();
             return data
         }
@@ -78,7 +78,7 @@ const AddADoctor = () => {
         <div className='mx-5'>
             <h2 className="text-2xl font-bold mb-5 mt-8">Add A Doctor</h2>
             <div>
-                <form onSubmit={handleFormSubmit} className='flex flex-col'>
+                <form onSubmit={handleFormSubmit} className='flex flex-col text-black'>
                     <input type="text" name='name' placeholder="Doctor's Full Name" className="input input-bordered w-full mb-5 max-w-xs md:max-w-md" required />
 
                     <input type="email" name='email' placeholder="Email" className="input input-bordered w-full mb-5 max-w-xs md:max-w-md" required />

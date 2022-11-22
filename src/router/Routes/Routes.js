@@ -63,7 +63,7 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: async ({ params }) => fetch(`https://simora-server.vercel.app/booking/${params.id}`)
+                loader: async ({ params }) => fetch(`https://simora-server-mostafizurhh.vercel.app/booking/${params.id}`)
             }
         ]
     },

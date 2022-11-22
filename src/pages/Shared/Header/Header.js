@@ -1,5 +1,5 @@
 
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext/AuthProvider';
 import { ThemeContext } from '../../../contexts/ThemeContext/ThemeProvider';
@@ -9,7 +9,7 @@ import logo from './logo.png'
 
 const Header = () => {
     const { user, logout } = useContext(AuthContext);
-    const [{ theme, isDark }, toggleTheme] = useContext(ThemeContext);
+    const [{ theme }, toggleTheme] = useContext(ThemeContext);
 
 
     const handleLogout = () => {
