@@ -5,7 +5,7 @@ const AppoinmentOption = ({ setTreatment, appoinmentOption }) => {
     const { name, slots, price } = appoinmentOption;
 
     return (
-        <div className="card shadow-xl text-center">
+        <div className="card shadow-xl text-center border">
             <div className="card-body">
                 <h2 className="text-xl text-secondary font-bold">{name}</h2>
                 <h2 className="text-lg text-teal-700 font-bold">Price: ${price}</h2>
