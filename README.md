@@ -2,6 +2,9 @@
 
 # Live Link: https://auth-react-context-3b499.web.app/
 
+## Tools and Technologies
+Tailwind, DaisyUI, React photo view, React-day-picker, React-Query, React-hot-toast, React-Router-Dom, React Icons are some of the technology components/libraries that has been used in this project
+
 ## About The Project
 
 * This is a fullstack project with combination of Client side, Server side and Database.
@@ -16,4 +19,3 @@
 * User Navigation and conditional rendering has been used here.
 * There is private routes and pages which can not be seen until you login/register.
 * AuthContexts has been used.
-* Tailwind, DaisyUI, React photo view, React-day-picker, React-Query, React-hot-toast, React-Router-Dom, React Icons are some of the technology components/libraries that has been used in this project
