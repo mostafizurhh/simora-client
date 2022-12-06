@@ -1,4 +1,4 @@
-# SIMORA Doctors Portal
+# Simora Dental
 
 # Live Link: https://auth-react-context-3b499.web.app/
 
