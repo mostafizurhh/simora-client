@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../Shared/Spinner/Spinner';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 
 const MyAppoinment = () => {
     const { user } = useContext(AuthContext)
 
-    const url = `https://simora-server-mostafizurhh.vercel.app/booking?email=${user?.email}`
+    const url = `http://localhost:5000/booking?email=${user?.email}`
 
-    const { data: booking = [], isLoading } = useQuery({
+    const { data: booking = [], isLoading, refetch } = useQuery({
         queryKey: ['booking', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
@@ -22,6 +23,28 @@ const MyAppoinment = () => {
             return data;
         }
     })
+
+    /* delete an appoinment */
+    const handleDelete = (id) => {
+        const proceed = window.confirm('Are you seure to delete?')
+        if (proceed) {
+            fetch(`http://localhost:5000/booking/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.deletedCount > 0) {
+                        toast.success(`Booking deleted successfully`, { duration: 4000 });
+                        refetch();
+                    }
+                })
+        }
+
+    }
 
     if (isLoading) {
         return <Spinner></Spinner>
@@ -40,7 +63,8 @@ const MyAppoinment = () => {
                             <th>Price</th>
                             <th>Date</th>
                             <th>Time</th>
-                            <th></th>
+                            <th>Payment</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,6 +89,9 @@ const MyAppoinment = () => {
                                         {
                                             book.price && book.paid && <span className='text-success font-bold'>Paid</span>
                                         }
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleDelete(book._id)} className='btn btn-error btn-sm'>Delete</button>
                                     </td>
                                 </tr>
                             )

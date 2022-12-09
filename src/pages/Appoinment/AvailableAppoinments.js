@@ -13,13 +13,13 @@ const AvailableAppoinments = ({ selectedDate }) => {
     const { data: appoinmentOptions = [], refetch, isLoading } = useQuery({
         queryKey: ['AppoinmentOptions', date],
         queryFn: () =>
-            fetch(`https://simora-server-mostafizurhh.vercel.app/AppoinmentOptions?date=${date}`)
+            fetch(`http://localhost:5000/AppoinmentOptions?date=${date}`)
                 .then(res => res.json())
     })
 
     // const [appoinmentOptions, setAppoinmentOptions] = useState([])
     // useEffect(() => {
-    //     fetch('https://simora-server-mostafizurhh.vercel.app/AppoinmentOptions')
+    //     fetch('http://localhost:5000/AppoinmentOptions')
     //         .then(res => res.json())
     //         .then(data => setAppoinmentOptions(data))
     // }, [])

@@ -40,7 +40,7 @@ const AddADoctor = () => {
                     }
                     console.log(doctorInfo)
                     /* save doctors info to DB */
-                    fetch('https://simora-server-mostafizurhh.vercel.app/doctors', {
+                    fetch('http://localhost:5000/doctors', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -64,7 +64,7 @@ const AddADoctor = () => {
     const { data: specialities = [], isLoading } = useQuery({
         queryKey: ['speciality'],
         queryFn: async () => {
-            const res = await fetch('https://simora-server-mostafizurhh.vercel.app/specialities');
+            const res = await fetch('http://localhost:5000/specialities');
             const data = await res.json();
             return data
         }

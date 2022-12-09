@@ -61,7 +61,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <img style={{ width: 35, height: 35 }} className='rounded-2xl' src={logo} alt="" />
-                <NavLink to='/' className="btn btn-ghost normal-case text-xl">SIMORA</NavLink>
+                <NavLink to='/' className="btn btn-ghost normal-case text-xl">Simora Dental</NavLink>
             </div>
             <div className="navbar-center hidden md:flex">
                 <ul className="menu menu-horizontal p-0">
