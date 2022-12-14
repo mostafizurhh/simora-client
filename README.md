@@ -12,6 +12,7 @@ MongoDb, React, Express.js, JWT, Firebase, Tailwind, DaisyUI, React-day-picker, 
 * MongoDB's CRUD Operation and Aggregation have been used in this project.
 * Express.js has been used to create all server API.
 * Stripe has been used as a payment processing method.
+* User will receive an email after booking confirmation.
 * Environment Variable has been used to hide credentials.
 * An user can take only one appointment for each service for each day.
 * An admin can add and remove a doctor from the doctor's database.
